@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "global.h"
+#include <QTimer>
 namespace Ui {
 class RegisterDialog;
 }
@@ -21,6 +22,10 @@ private slots:
     void slot_reg_mod_finish(ReqId id,QString res,ErrorCodes err);
     void on_sure_btn_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_cancel_btn_clicked();
+
 private:
     Ui::RegisterDialog *ui;
     void showTip(QString str,bool b_ok);
@@ -34,6 +39,11 @@ private:
     bool checkPassValid();
     bool checkConfirmValid();
     bool checkVarifyValid();
+    QTimer* _count_down;
+    int _count;
+    void changeTipPage();
+signals:
+    void sig_return_login();
 };
 
 #endif // REGISTERDIALOG_H

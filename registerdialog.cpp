@@ -4,7 +4,7 @@
 #include "httpmgr.h"
 RegisterDialog::RegisterDialog(QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::RegisterDialog)
+    , ui(new Ui::RegisterDialog),_count(5)
 {
     ui->setupUi(this);
     ui->pass_edit->setEchoMode(QLineEdit::Password);
@@ -53,6 +53,19 @@ RegisterDialog::RegisterDialog(QWidget *parent)
         }
         qDebug() << "Label was clicked!";
     });
+    _count_down=new QTimer(this);
+    connect(_count_down,&QTimer::timeout,this,[this](){
+        if(_count ==0){
+            _count_down->stop();
+            emit sig_return_login();
+            return;
+        }
+        _count--;
+        qDebug()<<_count;
+        auto str = QString("注册成功，%1秒后放回登陆界面").arg(_count);
+        ui->cd_lab->setText(str);
+    });
+
 }
 
 RegisterDialog::~RegisterDialog()
@@ -131,7 +144,7 @@ void RegisterDialog::initHttpHandlers()
         qDebug()<<jsonObj;
         qDebug()<<"user uid is"<<jsonObj["uid"].toString();
         qDebug()<<"email is"<<email;
-
+        changeTipPage();
     });
 }
 
@@ -235,6 +248,14 @@ bool RegisterDialog::checkVarifyValid()
     return true;
 }
 
+void RegisterDialog::changeTipPage()
+{
+    _count_down->stop();
+    ui->stackedWidget->setCurrentWidget(ui->page_2);
+    _count = 5;
+    _count_down->start(1000);
+}
+
 
 void RegisterDialog::on_sure_btn_clicked()
 {
@@ -263,5 +284,18 @@ void RegisterDialog::on_sure_btn_clicked()
     json_obj["varifycode"] = ui->varify_edit->text();
     HttpMgr::GetInstance()->PostHttpReq(QUrl(gate_url_prefix+"/user_register"),
                                         json_obj, ReqId::ID_REG_USER,Modules::REGISTERMOD);
+}
+
+
+void RegisterDialog::on_pushButton_clicked()
+{
+    _count_down->stop();
+    emit sig_return_login();
+}
+
+
+void RegisterDialog::on_cancel_btn_clicked()
+{
+    emit sig_return_login();
 }
 
