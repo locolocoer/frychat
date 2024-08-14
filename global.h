@@ -18,10 +18,12 @@ extern std::function<QString(QString)> xorstring;
 enum ReqId{
     ID_GET_VERFIY_CODE = 1001,
     ID_REG_USER = 1002,
+    ID_RESET_PWD = 1003,
 };
 
 enum Modules{
     REGISTERMOD = 0,
+    RESETMOD = 1,
 };
 
 enum ErrorCodes {
@@ -32,6 +34,8 @@ enum ErrorCodes {
     VarifyExpired = 4,
     VarifyError = 5,
     UserExist = 6,
+    EmailNotMatch = 7,
+    PasswdUpateFailed = 8,
 };
 
 enum TipErr{
