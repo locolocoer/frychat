@@ -29,6 +29,9 @@
    <iconset resource="images.qrc">
     <normaloff>:/images/frychat.ico</normaloff>:/images/frychat.ico</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -36,7 +39,7 @@
      <x>0</x>
      <y>0</y>
      <width>300</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

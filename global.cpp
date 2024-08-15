@@ -14,3 +14,4 @@ std::function<QString(QString)> xorstring = [](QString input){
     return result;
 };
 QString gate_url_prefix = "";
+QString head_pic="";

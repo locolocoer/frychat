@@ -50,5 +50,6 @@
         <file>images/voice_chat_hover.png</file>
         <file>images/voice_chat_normal.png</file>
         <file>images/voice_chat_press.png</file>
+        <file>images/tx.jpg</file>
     </qresource>
 </RCC>
