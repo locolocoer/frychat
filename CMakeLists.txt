@@ -36,6 +36,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         timerbtn.h timerbtn.cpp
         clickedlabel.h clickedlabel.cpp
         resetdialog.h resetdialog.cpp resetdialog.ui
+        tcpmgr.h tcpmgr.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET FryChat APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

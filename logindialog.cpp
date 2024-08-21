@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QPainterPath>
 #include "HttpMgr.h"
+#include "tcpmgr.h"
 LoginDialog::LoginDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::LoginDialog)
@@ -23,6 +24,8 @@ LoginDialog::LoginDialog(QWidget *parent)
     connect(HttpMgr::GetInstance().get(),&HttpMgr::sig_login_mod_finish,this,&LoginDialog::slot_login_mod_finish);
     ui->loginButton->setEnabled(true);
     connect(ui->loginButton,&QPushButton::clicked,this,&LoginDialog::on_loginButton_clicked);
+    connect(this,&LoginDialog::sig_connect_tcp,tcpMgr::GetInstance().get(),&tcpMgr::slot_connect_tcp);
+    connect(tcpMgr::GetInstance().get(),&tcpMgr::sig_con_sucess,this,&LoginDialog::slot_tcp_con_finish);
 }
 
 LoginDialog::~LoginDialog()
@@ -108,6 +111,7 @@ void LoginDialog::initHandlers()
         _uid = si.Uid;
         _token = si.Token;
         showTip("登陆成功",true);
+        qDebug()<<jsonobj;
         qDebug()<<"email is "<<email<<" uid is "<<si.Uid<<" host is "<<si.Host<<" port is "<< si.Port<<" Token is "<<si.Token;
         emit sig_connect_tcp(si);
     });
@@ -167,6 +171,24 @@ void LoginDialog::slot_login_mod_finish(ReqId id, QString res, ErrorCodes err)
     }
     _handlers[id](jsonDoc.object());
     return;
+}
+
+void LoginDialog::slot_tcp_con_finish(bool flag)
+{
+    if(flag){
+        showTip("服务器连接成功，正在登陆...",true);
+        QJsonObject obj;
+        obj["uid"]=_uid;
+        obj["token"]=_token;
+
+        QJsonDocument doc(obj);
+        QString data = doc.toJson(QJsonDocument::Indented);
+        emit tcpMgr::GetInstance()->sig_send_data(ReqId::ID_CHAT_LOGIN,data);
+        return;
+    }else{
+        showTip("网络错误",false);
+        return;
+    }
 }
 
 

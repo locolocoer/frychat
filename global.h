@@ -20,6 +20,7 @@ enum ReqId{
     ID_REG_USER = 1002,
     ID_RESET_PWD = 1003,
     ID_LOGIN_USER = 1004,
+    ID_CHAT_LOGIN = 1005,
 };
 
 enum Modules{
