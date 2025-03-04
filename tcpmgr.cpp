@@ -3,11 +3,11 @@
 tcpMgr::tcpMgr(QObject *parent)
     : QObject{parent},_host(""),_port(0),_message_id(0),_message_len(0),_recv_pending(false)
 {
-    connect(&_socket,&QTcpSocket::connected,[&](){
+    connect(&_socket,&QTcpSocket::connected,this,[&](){
         qDebug()<<"connect sucess";
         emit sig_con_sucess(true);
     });
-    connect(&_socket,&QTcpSocket::readyRead,[&](){
+    connect(&_socket,&QTcpSocket::readyRead,&_socket,[&](){
         _buffer.append(_socket.readAll());
         QDataStream stream(&_buffer,QIODeviceBase::ReadOnly);
         stream.setVersion(QDataStream::Qt_6_0);
@@ -31,7 +31,7 @@ tcpMgr::tcpMgr(QObject *parent)
             _buffer = _buffer.mid(_message_len);
         }
     });
-    QObject::connect(&_socket, QOverload<QAbstractSocket::SocketError>::of(&QTcpSocket::errorOccurred), [&](QAbstractSocket::SocketError socketError) {
+    QObject::connect(&_socket, QOverload<QAbstractSocket::SocketError>::of(&QTcpSocket::errorOccurred),&_socket, [&](QAbstractSocket::SocketError socketError) {
               Q_UNUSED(socketError)
               qDebug() << "Error:" << _socket.errorString();
      });

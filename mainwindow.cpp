@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-
+#include "tcpmgr.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     //创建注册消息连接
     connect(_login_dlg,&LoginDialog::switchRegister,this,&MainWindow::SlotSwitchReg);
     connect(_login_dlg,&LoginDialog::switchReset,this,&MainWindow::SlotSwitchReset);
+    connect(tcpMgr::GetInstance().get(),&tcpMgr::sig_switch_chat,this,&MainWindow::SlotSwitchChat);
+    emit tcpMgr::GetInstance()->sig_switch_chat();
 }
 
 MainWindow::~MainWindow()
@@ -74,5 +76,15 @@ void MainWindow::SlotReturnLogin2()
     //连接登录界面注册信号
     connect(_login_dlg, &LoginDialog::switchRegister, this, &MainWindow::SlotSwitchReg);
     connect(_login_dlg,&LoginDialog::switchReset,this,&MainWindow::SlotSwitchReset);
+}
+
+void MainWindow::SlotSwitchChat()
+{
+    _chat_widget = new ChatWidget(this);
+    qDebug()<<_chat_widget->size();
+    setCentralWidget(_chat_widget);
+    this->setFixedSize(_chat_widget->size());
+    _login_dlg->hide();
+    _chat_widget->show();
 }
 
