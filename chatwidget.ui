@@ -190,7 +190,7 @@
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QLineEdit" name="searchEdit"/>
+          <widget class="CustomizeEdit" name="searchEdit"/>
          </item>
          <item>
           <spacer name="horizontalSpacer">
@@ -522,6 +522,11 @@
    <class>ClickedBtn</class>
    <extends>QPushButton</extends>
    <header location="global">clickedbtn.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CustomizeEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">customizeedit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

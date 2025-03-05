@@ -54,3 +54,11 @@ color:rgb(42,112,241);
 #addBtn[state="press"]{
     border-image:url(:/images/add_friend_hover.png);
 }
+
+#search_wid{
+    background-color:rgb(247,247,247);
+}
+
+#searchEdit{
+    border:2px solid #f1f1f1;
+}
