@@ -44,6 +44,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         chatuseritem.h chatuseritem.cpp chatuseritem.ui
         listitembase.h listitembase.cpp
         chatpage.h chatpage.cpp chatpage.ui
+        chatview.h chatview.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET FryChat APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

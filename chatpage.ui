@@ -64,7 +64,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="chatDataWid" native="true"/>
+       <widget class="ChatView" name="chatDataWid" native="true"/>
       </item>
       <item>
        <widget class="QWidget" name="toolWid" native="true">
@@ -296,6 +296,12 @@
    <class>ClickedLabel</class>
    <extends>QLabel</extends>
    <header location="global">clickedlabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ChatView</class>
+   <extends>QWidget</extends>
+   <header>chatview.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
