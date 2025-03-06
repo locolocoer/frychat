@@ -1,3 +1,4 @@
 build/
 CMakeLists.txt.user
 *.ini
+CMakeLists.txt.user.*
