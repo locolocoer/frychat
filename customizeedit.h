@@ -16,6 +16,7 @@ private:
     void setUp();
 signals:
     void sig_focus_out();
+    void sig_clear_text();
 };
 
 #endif // CUSTOMIZEEDIT_H

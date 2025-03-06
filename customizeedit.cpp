@@ -44,11 +44,17 @@ void CustomizeEdit::setUp()
     QAction* clearAction = new QAction(this);
     clearAction->setIcon(QIcon(":/images/close_transparent.png"));
     this->addAction(clearAction,QLineEdit::TrailingPosition);
-    connect(this,&CustomizeEdit::textChanged,[clearAction](const QString& text){
+    connect(this,&CustomizeEdit::textChanged,this,[clearAction](const QString& text){
         if(!text.isEmpty()){
             clearAction->setIcon(QIcon(":/images/close_search.png"));
         }else{
             clearAction->setIcon(QIcon(":/images/close_transparent.png"));
         }
+    });
+    connect(clearAction,&QAction::triggered,this,[this,clearAction](){
+        this->clear();
+        clearAction->setIcon(QIcon(":/images/close_transparent.png"));
+        this->clearFocus();
+        emit sig_clear_text();
     });
 }
