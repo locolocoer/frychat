@@ -19,4 +19,11 @@ public:
     UserData();
 };
 
+class ApplyInfo{
+public:
+    ApplyInfo();
+    QString _icon,_name,_desc;
+    int _uid;
+};
+
 #endif // USERDATA_H

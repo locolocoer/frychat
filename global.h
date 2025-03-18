@@ -80,7 +80,7 @@ enum ListItemType{
     AddUser,
     Invalid,
     GroupTip,
-
+    ApplyFriend,
 };
 
 enum ChatRole{

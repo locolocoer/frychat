@@ -59,6 +59,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         applyfriend.h applyfriend.cpp applyfriend.ui
         friendlab.h friendlab.cpp friendlab.ui
         usermgr.h usermgr.cpp
+        contactuserlist.h contactuserlist.cpp
+        contactuseritem.h contactuseritem.cpp contactuseritem.ui
+        applyfriendpage.h applyfriendpage.cpp applyfriendpage.ui
+        applyfrienditem.h applyfrienditem.cpp applyfrienditem.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET FryChat APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
