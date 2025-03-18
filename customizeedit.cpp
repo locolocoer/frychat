@@ -37,24 +37,5 @@ void CustomizeEdit::focusOutEvent(QFocusEvent *e)
 
 void CustomizeEdit::setUp()
 {
-    QAction* searchAction = new QAction(this);
-    searchAction->setIcon(QIcon(":/images/search.png"));
-    this->addAction(searchAction,QLineEdit::LeadingPosition);
-    this->setPlaceholderText("搜索");
-    QAction* clearAction = new QAction(this);
-    clearAction->setIcon(QIcon(":/images/close_transparent.png"));
-    this->addAction(clearAction,QLineEdit::TrailingPosition);
-    connect(this,&CustomizeEdit::textChanged,this,[clearAction](const QString& text){
-        if(!text.isEmpty()){
-            clearAction->setIcon(QIcon(":/images/close_search.png"));
-        }else{
-            clearAction->setIcon(QIcon(":/images/close_transparent.png"));
-        }
-    });
-    connect(clearAction,&QAction::triggered,this,[this,clearAction](){
-        this->clear();
-        clearAction->setIcon(QIcon(":/images/close_transparent.png"));
-        this->clearFocus();
-        emit sig_clear_text();
-    });
+
 }

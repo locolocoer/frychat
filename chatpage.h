@@ -16,6 +16,9 @@ public:
     ~ChatPage();
 protected:
     virtual void paintEvent(QPaintEvent *event) override;
+private slots:
+    void on_sendBtn_clicked();
+
 private:
     Ui::ChatPage *ui;
 };

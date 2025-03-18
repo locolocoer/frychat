@@ -6,6 +6,8 @@
 #include "global.h"
 #include <QTcpSocket>
 #include <functional>
+#include "userdata.h"
+
 class tcpMgr : public QObject,public Singleton<tcpMgr>
 {
     Q_OBJECT
@@ -28,6 +30,7 @@ signals:
     void sig_con_sucess(bool flag);
     void sig_send_data(ReqId id,QString data);
     void sig_switch_chat();
+    void sig_user_search(std::shared_ptr<SearchInfo> si);
 };
 
 #endif // TCPMGR_H

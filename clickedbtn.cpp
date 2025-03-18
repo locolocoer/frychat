@@ -14,6 +14,7 @@ void ClickedBtn::setState(QString normal, QString hover, QString press)
 ClickedBtn::ClickedBtn(QWidget *parent):QPushButton(parent)
 {
     setCursor(Qt::PointingHandCursor);
+    setFocusPolicy(Qt::NoFocus);
 }
 
 ClickedBtn::~ClickedBtn()

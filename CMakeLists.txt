@@ -45,6 +45,20 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         listitembase.h listitembase.cpp
         chatpage.h chatpage.cpp chatpage.ui
         chatview.h chatview.cpp
+        chatitembase.h chatitembase.cpp
+        bubbleframe.h bubbleframe.cpp
+        textbubble.h textbubble.cpp
+        picturebubble.h picturebubble.cpp
+        messagetextedit.h messagetextedit.cpp
+        statewidget.h statewidget.cpp
+        searchlist.h searchlist.cpp
+        userdata.h userdata.cpp
+        adduseritem.h adduseritem.cpp adduseritem.ui
+        findsucessdlg.h findsucessdlg.cpp findsucessdlg.ui
+        clickedoncelabel.h clickedoncelabel.cpp
+        applyfriend.h applyfriend.cpp applyfriend.ui
+        friendlab.h friendlab.cpp friendlab.ui
+        usermgr.h usermgr.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET FryChat APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -97,4 +111,6 @@ if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(FryChat)
 endif()
 
+file(COPY ${CMAKE_SOURCE_DIR}/static DESTINATION ${CMAKE_BINARY_DIR})
 
+file(COPY ${CMAKE_SOURCE_DIR}/config.ini DESTINATION ${CMAKE_BINARY_DIR})

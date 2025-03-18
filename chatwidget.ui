@@ -39,43 +39,77 @@
      </property>
      <property name="minimumSize">
       <size>
-       <width>0</width>
+       <width>60</width>
        <height>0</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>50</width>
+       <width>60</width>
        <height>1000</height>
       </size>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
       <property name="leftMargin">
-       <number>10</number>
+       <number>0</number>
       </property>
       <property name="topMargin">
        <number>30</number>
       </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
       <item>
        <widget class="QWidget" name="widget" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>60</height>
+         </size>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="sideHeadLab">
+           <property name="minimumSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="widget_2" native="true">
         <layout class="QVBoxLayout" name="verticalLayout_3">
-         <property name="spacing">
-          <number>30</number>
-         </property>
          <property name="leftMargin">
-          <number>0</number>
+          <number>15</number>
          </property>
          <property name="topMargin">
-          <number>0</number>
+          <number>15</number>
          </property>
          <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
+          <number>15</number>
          </property>
          <item>
-          <widget class="QLabel" name="dideChatLab">
+          <widget class="StateWidget" name="sideChatLab" native="true">
            <property name="minimumSize">
             <size>
              <width>30</width>
@@ -88,50 +122,25 @@
              <height>30</height>
             </size>
            </property>
-           <property name="text">
-            <string/>
+          </widget>
+         </item>
+         <item>
+          <widget class="StateWidget" name="sideContactLab" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
            </property>
           </widget>
          </item>
         </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="sideContactLab">
-        <property name="minimumSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="sideHeadLab">
-        <property name="minimumSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
        </widget>
       </item>
       <item>
@@ -237,7 +246,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="searchList"/>
+       <widget class="SearchList" name="searchList"/>
       </item>
       <item>
        <widget class="ChatUserList" name="chatUserList"/>
@@ -277,6 +286,17 @@
    <extends>QWidget</extends>
    <header location="global">chatpage.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StateWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">statewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SearchList</class>
+   <extends>QListWidget</extends>
+   <header>searchlist.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

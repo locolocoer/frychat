@@ -16,6 +16,7 @@ public:
     void SetState(QString normal="",QString hover="",QString press="",
                   QString select="",QString select_hover="",QString select_press="");
     ClickLbState GetCurState();
+    void SetCurrState(ClickLbState state);
 private:
     QString _normal;
     QString _normal_hover;
@@ -26,7 +27,8 @@ private:
     QString _selected_press;
     ClickLbState _curstate;
 signals:
-    void clicked(void);
+    //void clicked(void);
+    void clicked(QString, ClickLbState);
 };
 
 #endif // CLICKEDLABEL_H

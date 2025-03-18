@@ -21,6 +21,7 @@ enum ReqId{
     ID_RESET_PWD = 1003,
     ID_LOGIN_USER = 1004,
     ID_CHAT_LOGIN = 1005,
+    ID_SEARCH_USR_REQ = 1006,
 };
 
 enum Modules{
@@ -81,5 +82,20 @@ enum ListItemType{
     GroupTip,
 
 };
+
+enum ChatRole{
+    self,
+    other,
+};
+
+struct MsgInfo{
+    QString msgFlag;
+    QString content;
+    QPixmap pixmap;
+};
+
+const int MIN_APPLY_LABEL_ED_LEN = 40;
+const QString add_prefix = "添加标签";
+const int tip_offset = 5;
 
 #endif // GLOBAL_H
