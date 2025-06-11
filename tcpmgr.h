@@ -25,12 +25,15 @@ private:
     void initHandlers();
 public slots:
     void slot_connect_tcp(ServerInfo si);
-    void slot_send_data(ReqId id, QString data);
+    void slot_send_data(ReqId id, QByteArray data);
 signals:
     void sig_con_sucess(bool flag);
-    void sig_send_data(ReqId id,QString data);
+    void sig_send_data(ReqId id,QByteArray data);
     void sig_switch_chat();
     void sig_user_search(std::shared_ptr<SearchInfo> si);
+    void sig_auth_rsp(std::shared_ptr<AuthRsp> rsp);
+    void sig_login_failed(ErrorCodes ec);
+    void sig_login_sucess();
 };
 
 #endif // TCPMGR_H

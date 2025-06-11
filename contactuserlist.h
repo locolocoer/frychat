@@ -1,7 +1,9 @@
 #ifndef CONTACTUSERLIST_H
 #define CONTACTUSERLIST_H
-#include <QListWidget>
+#include "contactuseritem.h"
 
+#include <QListWidget>
+class ContactUserItem;
 class ContactUserList:public QListWidget
 {
     Q_OBJECT
@@ -12,6 +14,8 @@ protected:
     bool eventFilter(QObject* watched,QEvent* event)override;
 private:
     void AddContactUserList();
+    ContactUserItem* _add_friend_item;
+    QListWidgetItem* _group_item;
 public slots:
     void slot_item_clicked(QListWidgetItem *item);
 signals:

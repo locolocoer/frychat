@@ -1,5 +1,5 @@
 #include "tcpmgr.h"
-
+#include "global.h"
 tcpMgr::tcpMgr(QObject *parent)
     : QObject{parent},_host(""),_port(0),_message_id(0),_message_len(0),_recv_pending(false)
 {
@@ -27,6 +27,8 @@ tcpMgr::tcpMgr(QObject *parent)
             }
             _recv_pending = false;
             QByteArray message = _buffer.mid(0,_message_len);
+            QString msgStr = QString::fromUtf8(message);
+            _handlers[_message_id](_message_id,message);
             qDebug()<<"receive message is "<< message;
             _buffer = _buffer.mid(_message_len);
         }
@@ -41,6 +43,33 @@ tcpMgr::tcpMgr(QObject *parent)
     connect(this,&tcpMgr::sig_send_data,this,&tcpMgr::slot_send_data);
 }
 
+void tcpMgr::initHandlers()
+{
+    _handlers.insert(ReqId::ID_SEARCH_USR_RSP,[this](ReqId id,QByteArray msg){
+        QJsonDocument doc = QJsonDocument::fromJson(message);
+        if(doc.isNull()){
+            qDebug()<<"conver to jsondoc failed";
+            return;
+        }
+        QJsonObject json = doc.object();
+        if(!json.contains("error")){
+            qDebug()<<"error "
+            return;
+        }
+        int err = json["error"].toInt();
+        if(err!=ErrorCodes::SUCESS){
+            qDebug()<<"error code:"<<err;
+            return;
+        }
+        int uid = json["uid"].toInt();
+        QString name = json["name"].toString();
+        QString nick = json["nick"].toString();
+        QString desc = json["desc"].toString();
+        int sex = json["sex"].toInt();
+        emit sig_user_search(std::make_shared<SearchInfo>(uid,name,nick,desc,sex));
+    });
+}
+
 void tcpMgr::slot_connect_tcp(ServerInfo si)
 {
     qDebug()<<"Receive signal, connect to server!";
@@ -49,16 +78,15 @@ void tcpMgr::slot_connect_tcp(ServerInfo si)
     _socket.connectToHost(_host,_port);
 }
 
-void tcpMgr::slot_send_data(ReqId reqId, QString data)
+void tcpMgr::slot_send_data(ReqId reqId, QByteArray data)
 {
     uint16_t id = reqId;
-    QByteArray data_byte = data.toUtf8();
-    uint16_t len = data_byte.size();
+    uint16_t len = data.size();
     QByteArray block;
     QDataStream stream(&block,QIODeviceBase::WriteOnly);
     stream.setByteOrder(QDataStream::BigEndian);
 
     stream<<id<<len;
-    block.append(data_byte);
+    block.append(data);
     _socket.write(block);
 }

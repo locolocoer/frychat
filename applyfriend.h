@@ -5,7 +5,7 @@
 #include "clickedlabel.h"
 #include "friendlab.h"
 #include "userdata.h"
-
+#include <memory>
 namespace Ui {
 class ApplyFriend;
 }

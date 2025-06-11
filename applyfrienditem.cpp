@@ -6,7 +6,7 @@ ApplyFriendItem::ApplyFriendItem(QWidget *parent)
     , ui(new Ui::ApplyFriendItem)
 {
     ui->setupUi(this);
-    SetItemType(ListItemType::ApplyFriend);
+    SetItemType(ListItemType::ApplyFriendType);
     ui->addBtn->setState("normal","hover","press");
     ui->addBtn->hide();
     connect(ui->addBtn,&ClickedBtn::clicked,this,[this](){
@@ -32,8 +32,13 @@ void ApplyFriendItem::showBtn(bool b_show)
 {
     if(b_show){
         ui->addBtn->show();
+        ui->addedLab->hide();
+        _added = false;
+        return;
     }
     ui->addBtn->hide();
+    ui->addedLab->show();
+    _added = true;
 }
 
 int ApplyFriendItem::getUid()

@@ -20,8 +20,9 @@ enum ReqId{
     ID_REG_USER = 1002,
     ID_RESET_PWD = 1003,
     ID_LOGIN_USER = 1004,
-    ID_CHAT_LOGIN = 1005,
-    ID_SEARCH_USR_REQ = 1006,
+    ID_CHAT_LOGIN = 1006,
+    ID_SEARCH_USR_REQ = 1007,
+    ID_SEARCH_USR_RSP = 1008,
 };
 
 enum Modules{
@@ -80,7 +81,8 @@ enum ListItemType{
     AddUser,
     Invalid,
     GroupTip,
-    ApplyFriend,
+    ApplyFriendType,
+    Group,
 };
 
 enum ChatRole{
@@ -97,5 +99,28 @@ struct MsgInfo{
 const int MIN_APPLY_LABEL_ED_LEN = 40;
 const QString add_prefix = "添加标签";
 const int tip_offset = 5;
+
+const std::vector<QString>  strs ={"hello world !",
+                             "nice to meet u",
+                             "New year，new life",
+                             "You have to love yourself",
+                             "My love is written in the wind ever since the whole world is you"};
+const std::vector<QString> heads = {
+    ":/images/head_1.jpg",
+    ":/images/head_2.jpg",
+    ":/images/head_3.jpg",
+    ":/images/head_4.jpg",
+    ":/images/head_5.jpg"
+};
+const std::vector<QString> names = {
+    "llfc",
+    "zack",
+    "golang",
+    "cpp",
+    "java",
+    "nodejs",
+    "python",
+    "rust"
+};
 
 #endif // GLOBAL_H

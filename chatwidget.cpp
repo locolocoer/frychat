@@ -5,6 +5,7 @@
 #include <QRandomGenerator>
 #include "chatuseritem.h"
 #include <QListWidgetItem>
+#include "global.h"
 ChatWidget::ChatWidget(QWidget *parent)
     : QWidget(parent),_state(ChatUIMode::ChatMode)
     , ui(new Ui::ChatWidget),_b_loading(false)
@@ -55,6 +56,7 @@ ChatWidget::ChatWidget(QWidget *parent)
         ui->searchEdit->clearFocus();
         //emit sig_clear_text();
     });
+    ui->searchList->SetSearchEdit(ui->searchEdit);
 }
 
 ChatWidget::~ChatWidget()
@@ -82,28 +84,6 @@ void ChatWidget::showSearch(bool bsearch)
     }
 }
 
-std::vector<QString>  strs ={"hello world !",
-                             "nice to meet u",
-                             "New year，new life",
-                             "You have to love yourself",
-                             "My love is written in the wind ever since the whole world is you"};
-std::vector<QString> heads = {
-    ":/images/head_1.jpg",
-    ":/images/head_2.jpg",
-    ":/images/head_3.jpg",
-    ":/images/head_4.jpg",
-    ":/images/head_5.jpg"
-};
-std::vector<QString> names = {
-    "llfc",
-    "zack",
-    "golang",
-    "cpp",
-    "java",
-    "nodejs",
-    "python",
-    "rust"
-};
 
 void ChatWidget::addChatUserList()
 {

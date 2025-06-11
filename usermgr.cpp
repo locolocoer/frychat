@@ -25,4 +25,9 @@ QString UserMgr::getUid()
     return _uid;
 }
 
+std::vector<std::shared_ptr<ApplyInfo> > UserMgr::GetApplyList()
+{
+    return _apply_list;
+}
+
 UserMgr::UserMgr() {}
