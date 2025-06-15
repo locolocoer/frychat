@@ -2,7 +2,7 @@
 #include "ui_logindialog.h"
 #include <QPainter>
 #include <QPainterPath>
-#include "HttpMgr.h"
+#include "httpmgr.h"
 #include "tcpmgr.h"
 LoginDialog::LoginDialog(QWidget *parent)
     : QDialog(parent)
