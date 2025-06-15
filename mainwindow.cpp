@@ -13,8 +13,9 @@ MainWindow::MainWindow(QWidget *parent)
     //创建注册消息连接
     connect(_login_dlg,&LoginDialog::switchRegister,this,&MainWindow::SlotSwitchReg);
     connect(_login_dlg,&LoginDialog::switchReset,this,&MainWindow::SlotSwitchReset);
-    connect(tcpMgr::GetInstance().get(),&tcpMgr::sig_switch_chat,this,&MainWindow::SlotSwitchChat);
-    emit tcpMgr::GetInstance()->sig_switch_chat();
+    connect(tcpMgr::GetInstance().get(),&tcpMgr::sig_login_sucess,this,&MainWindow::SlotSwitchChat);
+    emit tcpMgr::GetInstance()->sig_login_sucess();
+    // emit tcpMgr::GetInstance()->sig_switch_chat();
 }
 
 MainWindow::~MainWindow()

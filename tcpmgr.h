@@ -17,11 +17,11 @@ private:
     QTcpSocket _socket;
     QString _host;
     uint16_t _port;
-    uint16_t _message_id;
+    ReqId _message_id;
     uint16_t _message_len;
     bool _recv_pending;
     QByteArray _buffer;
-    QMap<ReqId,std::function<void(ReqId,QString)>> _handlers;
+    QMap<ReqId,std::function<void(ReqId,QByteArray)>> _handlers;
     void initHandlers();
 public slots:
     void slot_connect_tcp(ServerInfo si);

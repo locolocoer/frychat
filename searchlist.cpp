@@ -6,6 +6,7 @@
 #include "findsucessdlg.h"
 #include "loadingdlg.h"
 #include <QJsonDocument>
+#include "findfaildlg.h"
 
 SearchList::SearchList(QWidget *parent):QListWidget(parent),_find_dlg(nullptr),_search_edit(nullptr),_send_pending(false)
 {
@@ -119,7 +120,7 @@ void SearchList::slot_user_search(std::shared_ptr<SearchInfo> si)
 {
     waitPending(false);
     if(si==nullptr){
-        _find_dlg = std::make_shared<FindFailedDlg>(this);
+        _find_dlg = std::make_shared<FindFailDlg>(this);
     }else{
         _find_dlg =  std::make_shared<FindSucessDlg>(this);
         auto find_sucess_dlg = std::dynamic_pointer_cast<FindSucessDlg>(_find_dlg);

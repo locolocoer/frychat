@@ -1,7 +1,8 @@
 #include "tcpmgr.h"
 #include "global.h"
+#include "usermgr.h"
 tcpMgr::tcpMgr(QObject *parent)
-    : QObject{parent},_host(""),_port(0),_message_id(0),_message_len(0),_recv_pending(false)
+    : QObject{parent},_host(""),_port(0),_message_len(0),_recv_pending(false)
 {
     connect(&_socket,&QTcpSocket::connected,this,[&](){
         qDebug()<<"connect sucess";
@@ -45,15 +46,38 @@ tcpMgr::tcpMgr(QObject *parent)
 
 void tcpMgr::initHandlers()
 {
-    _handlers.insert(ReqId::ID_SEARCH_USR_RSP,[this](ReqId id,QByteArray msg){
-        QJsonDocument doc = QJsonDocument::fromJson(message);
+    _handlers.insert(ReqId::ID_CHAT_LOGIN,[this](ReqId id,QByteArray msg){
+        QJsonDocument doc = QJsonDocument::fromJson(msg);
         if(doc.isNull()){
             qDebug()<<"conver to jsondoc failed";
             return;
         }
         QJsonObject json = doc.object();
         if(!json.contains("error")){
-            qDebug()<<"error "
+            qDebug()<<"error ";
+            emit sig_login_failed(ErrorCodes::ERR_JSON);
+            return;
+        }
+        ErrorCodes err = (ErrorCodes)json["error"].toInt();
+        if(err!=ErrorCodes::SUCESS){
+            qDebug()<<"error code:"<<err;
+            emit sig_login_failed(err);
+            return;
+        }
+        UserMgr::GetInstance()->setUid(json["uid"].toString());
+        UserMgr::GetInstance()->setName(json["name"].toString());
+        UserMgr::GetInstance()->setToken(json["token"].toString());
+        emit sig_login_sucess();
+    });
+    _handlers.insert(ReqId::ID_SEARCH_USR_RSP,[this](ReqId id,QByteArray msg){
+        QJsonDocument doc = QJsonDocument::fromJson(msg);
+        if(doc.isNull()){
+            qDebug()<<"conver to jsondoc failed";
+            return;
+        }
+        QJsonObject json = doc.object();
+        if(!json.contains("error")){
+            qDebug()<<"error ";
             return;
         }
         int err = json["error"].toInt();

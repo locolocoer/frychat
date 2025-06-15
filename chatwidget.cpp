@@ -126,9 +126,9 @@ void ChatWidget::handleGlobalMouseEvent(QMouseEvent* ev)
         return;
     }
 
-    QPoint po = ui->searchList->mapFromGlobal(ev->globalPos());
+    QPointF po = ui->searchList->mapFromGlobal(ev->globalPosition());
 
-    if(!ui->searchList->rect().contains(po)){
+    if(!ui->searchList->rect().contains(po.toPoint())){
         ui->searchEdit->clear();
         showSearch(false);
     }

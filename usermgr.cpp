@@ -1,6 +1,6 @@
 #include "usermgr.h"
 
-void UserMgr::SetUid(QString uid)
+void UserMgr::setUid(QString uid)
 {
     _uid = uid;
 }

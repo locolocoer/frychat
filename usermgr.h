@@ -10,7 +10,7 @@ class UserMgr:public Singleton<UserMgr>,
     friend class Singleton<UserMgr>;
 public:
     ~UserMgr()=default;
-    void SetUid(QString uid);
+    void setUid(QString uid);
     void setName(QString name);
     void setToken(QString token);
     QString getName();
